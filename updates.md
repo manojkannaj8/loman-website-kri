@@ -36,7 +36,8 @@ Visual redesign only; content, links, form and behaviour unchanged. Direction an
   2. The S and B are traced as fine pencil lines (SVG `pathLength`), then thicken to full stroke weight.
   3. "BUILD STUDIO" settles in beneath.
   4. The wordmark clears, the mark flies into the header logo position (measured at run time) while the ink overlay lifts; the hero starts its own entrance at the same moment and the header links fade in.
-- Total roughly 3 to 4 seconds depending on load speed. Plays once per browser session (`sessionStorage` key `bs-intro-seen`). Skipped entirely with "reduce motion". Any key, click, wheel or touch skips straight to the handoff.
+- Plays on every full page load (it originally played once per session, which made it look missing on reload; changed at the client's request). Skipped entirely with "reduce motion". Any key, click, wheel or touch skips straight to the handoff.
+- The drawing (steps 1 to 3) is pure CSS on server-rendered markup, so it starts at first paint instead of waiting for JavaScript; `intro.tsx` only runs the handoff, at 2.3 s after first paint or as soon as it hydrates if later.
 - No flash or layout shift: an inline script in `layout.tsx` sets `html[data-intro]` to `play` or `skip` before first paint; the overlay only shows in `play`. `scrollbar-gutter: stable` keeps page width identical when scrolling is released. Measured CLS 0.
 - Safety: without JavaScript nothing shows; if the intro never hands over, the boot script releases the page after 7 seconds.
 - `useIntroReady()` lets components wait for the handoff (used by the hero).
