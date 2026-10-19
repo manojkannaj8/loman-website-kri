@@ -1,5 +1,5 @@
 // Single source of truth for all site copy. Every string here comes from the
-// reference video — see reference-analysis.md before adding anything new.
+// reference video: see reference-analysis.md before adding anything new.
 
 export const site = {
   name: "Build Studio",

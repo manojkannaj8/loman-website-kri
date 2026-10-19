@@ -1,31 +1,63 @@
 "use client";
 
-import { motion } from "motion/react";
+import Image from "next/image";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 import { hero, site } from "@/lib/content";
 import { ButtonArrow, buttonClass } from "../button";
 import { CountUp } from "../count-up";
-import { HeroDrawing } from "../hero-drawing";
 import { ArrowRight } from "../icons";
 import { EASE } from "../motion";
 import { StartProjectLink } from "../start-project-link";
+import housePhoto from "../../../public/images/house-dusk.jpg";
 
 const rise = (delay: number) => ({
-  initial: { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
   transition: { delay, duration: 1, ease: EASE },
 });
 
 export function Hero() {
-  return (
-    <section id="top" aria-labelledby="hero-title" className="relative overflow-hidden">
-      <div className="grid-paper-light pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
+  const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  // Gentle parallax: the photo drifts slower than the page.
+  const photoY = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["0%", "16%"]);
+  const copyY = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["0%", "-10%"]);
 
-      <div className="container-x relative grid gap-12 pb-12 pt-[calc(var(--header-h)+3rem)] lg:grid-cols-12 lg:gap-8 lg:pb-16 lg:pt-[calc(var(--header-h)+5rem)]">
-        <div className="relative z-10 lg:col-span-8 lg:col-start-1 lg:row-start-1 lg:pt-6">
-          <motion.p {...rise(0.1)} className="label flex flex-wrap items-center gap-x-3 gap-y-2 text-muted">
+  return (
+    <section id="top" aria-labelledby="hero-title">
+      <div ref={ref} className="on-ink relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden bg-dusk text-paper">
+        <motion.div style={{ y: photoY }} className="absolute inset-0 -z-20">
+          <motion.div
+            className="absolute inset-0"
+            initial={{ scale: 1.08 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 2.6, ease: EASE }}
+          >
+            <Image
+              src={housePhoto}
+              alt="A modern single storey home at dusk, with warm light in the windows, timber slat cladding, a brick porch pillar and a lit canopy over the front door"
+              fill
+              priority
+              placeholder="blur"
+              sizes="100vw"
+              className="object-cover object-[52%_50%]"
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Dusk falls from the bottom left so the words sit on the darkest part of the photo. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgb(20_18_16/0.94)_0%,rgb(20_18_16/0.7)_30%,rgb(20_18_16/0.15)_62%,rgb(20_18_16/0)_75%),linear-gradient(to_bottom,rgb(22_28_36/0.6)_0%,rgb(22_28_36/0)_22%)] lg:bg-[linear-gradient(to_top,rgb(20_18_16/0.9)_0%,rgb(20_18_16/0.45)_32%,rgb(20_18_16/0)_60%),linear-gradient(to_right,rgb(22_28_36/0.82)_0%,rgb(22_28_36/0.55)_45%,rgb(22_28_36/0.12)_70%,rgb(22_28_36/0)_80%),linear-gradient(to_bottom,rgb(22_28_36/0.55)_0%,rgb(22_28_36/0)_20%)]"
+        />
+
+        <motion.div style={{ y: copyY }} className="container-x relative pb-14 pt-[calc(var(--header-h)+4rem)] sm:pb-20 lg:pb-24">
+          <motion.p {...rise(0.2)} className="label flex flex-wrap items-center gap-x-4 gap-y-2 text-paper/85">
             {site.disciplines.map((d, i) => (
-              <span key={d} className="inline-flex items-center gap-3">
-                {i > 0 ? <span className="h-1 w-1 rotate-45 bg-oxide" aria-hidden="true" /> : null}
+              <span key={d} className="inline-flex items-center gap-4">
+                {i > 0 ? <span className="h-3 w-px bg-glow/70" aria-hidden="true" /> : null}
                 {d}
               </span>
             ))}
@@ -33,95 +65,82 @@ export function Hero() {
 
           <h1
             id="hero-title"
-            className="font-display mt-8 text-[clamp(2.4rem,5.4vw,5.1rem)] font-medium leading-[0.98]"
+            className="font-display mt-6 max-w-[15ch] text-[clamp(2.75rem,7.2vw,6.6rem)] leading-[0.98] text-paper"
           >
             <span className="block overflow-hidden pb-[0.06em]">
               <motion.span
                 className="block"
                 initial={{ y: "105%" }}
                 animate={{ y: "0%" }}
-                transition={{ delay: 0.15, duration: 1.1, ease: EASE }}
+                transition={{ delay: 0.25, duration: 1.2, ease: EASE }}
               >
                 {hero.headline}
               </motion.span>
             </span>
-            <span className="block overflow-hidden pb-[0.08em] pt-[0.32em]">
-              <motion.span
-                className="relative inline-block whitespace-nowrap text-oxide"
-                initial={{ y: "120%" }}
+            <span className="block overflow-hidden pb-[0.18em]">
+              <motion.em
+                className="relative inline-block whitespace-nowrap pr-[0.08em] text-glow"
+                initial={{ y: "115%" }}
                 animate={{ y: "0%" }}
-                transition={{ delay: 0.28, duration: 1.1, ease: EASE }}
+                transition={{ delay: 0.4, duration: 1.2, ease: EASE }}
               >
-                {/* Roof pitch drawn over the emphasised phrase. */}
-                <svg
-                  className="absolute -top-[0.26em] left-0 h-[0.26em] w-full overflow-visible"
-                  viewBox="0 0 400 26"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <motion.path
-                    d="M2 25 L200 2 L398 25"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ delay: 1, duration: 1.2, ease: EASE }}
-                  />
-                </svg>
                 {hero.emphasis}
-              </motion.span>
+                {/* A strip of light, like the LED line in the porch canopy. */}
+                <motion.span
+                  aria-hidden="true"
+                  className="light-line absolute -bottom-[0.06em] left-0 h-[2px] w-full origin-left"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 1.2, duration: 1.4, ease: EASE }}
+                />
+              </motion.em>
             </span>
           </h1>
 
-          <motion.p {...rise(0.5)} className="mt-8 max-w-[44ch] text-[1.125rem] leading-relaxed text-muted">
-            {hero.sub}
-          </motion.p>
+          <div className="mt-8 grid gap-8 lg:mt-10 lg:grid-cols-[minmax(0,34rem)_auto] lg:items-end lg:justify-between">
+            <motion.p {...rise(0.65)} className="max-w-[40ch] text-[1.125rem] leading-relaxed text-paper/85 sm:text-[1.2rem]">
+              {hero.sub}
+            </motion.p>
 
-          <motion.div {...rise(0.6)} className="mt-10 flex flex-wrap gap-3">
-            <StartProjectLink className={buttonClass("solid")}>
-              Start a project
-              <ButtonArrow>
-                <ArrowRight size={16} />
-              </ButtonArrow>
-            </StartProjectLink>
-            <a href="#services" className={buttonClass("outline")}>
-              Our services
-            </a>
-          </motion.div>
-        </div>
-
-        <div className="relative lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:-mr-4 lg:mt-24">
-          <HeroDrawing className="mx-auto w-full max-w-[30rem] lg:ml-auto lg:mr-0" />
-        </div>
+            <motion.div {...rise(0.8)} className="flex flex-wrap gap-3">
+              <StartProjectLink className={buttonClass("glow")}>
+                Start a project
+                <ButtonArrow>
+                  <ArrowRight size={16} />
+                </ButtonArrow>
+              </StartProjectLink>
+              <a href="#services" className={buttonClass("ghost-ink")}>
+                Our services
+              </a>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
 
-      {/* Title block — the stats panel of the drawing sheet. */}
-      <div className="container-x relative pb-16 lg:pb-24">
-        <motion.dl
-          {...rise(0.8)}
-          className="grid grid-cols-2 border-l border-t border-line-strong md:grid-cols-4"
-        >
-          <div className="col-span-2 flex flex-col justify-between gap-6 border-b border-r border-line-strong p-5 md:col-span-1 md:p-6">
-            <dt className="label text-muted">Practice</dt>
-            <dd className="text-[0.95rem] leading-snug">
-              Co. Meath
-              <span className="block text-muted">Projects across Leinster</span>
+      {/* Stats on a plaster band, the doorstep beneath the photo. */}
+      <div className="border-b border-line bg-paper">
+        <motion.dl {...rise(0.9)} className="container-x grid grid-cols-2 lg:grid-cols-4">
+          <div className="col-span-2 flex flex-col justify-center gap-1 border-b border-line py-7 lg:col-span-1 lg:border-b-0 lg:border-r lg:py-10 lg:pr-8">
+            <dt className="label text-timber">The practice</dt>
+            <dd className="text-[1.05rem] leading-snug">
+              Co. Meath, <span className="text-muted">working across Leinster</span>
             </dd>
           </div>
-          {hero.stats.map((stat, i) => (
-            <div
-              key={stat.label}
-              className={`flex flex-col justify-between gap-6 border-b border-r border-line-strong p-5 md:p-6 ${
-                i === 2 ? "col-span-2 md:col-span-1" : ""
-              }`}
-            >
-              <dt className="label order-2 text-muted">{stat.label}</dt>
-              <dd className="font-display order-1 text-[clamp(2.4rem,4.4vw,3.6rem)] font-medium leading-none">
-                <CountUp value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
-              </dd>
-            </div>
-          ))}
+          {hero.stats.map((stat, i) => {
+            const cell = [
+              "border-r border-line pr-5 lg:pr-8",
+              "pl-5 lg:border-r lg:border-line lg:pr-8",
+              "col-span-2 border-t border-line lg:col-span-1 lg:border-t-0",
+            ][i];
+            return (
+              <div key={stat.label} className={`flex flex-col-reverse justify-end gap-3 py-7 lg:py-10 lg:pl-8 ${cell}`}>
+                <dt className="label text-muted">{stat.label}</dt>
+                <dd className="font-display opsz-text text-[clamp(2.6rem,4.6vw,3.9rem)] leading-none tracking-[-0.02em]">
+                  <CountUp value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                </dd>
+              </div>
+            );
+          })}
         </motion.dl>
       </div>
     </section>

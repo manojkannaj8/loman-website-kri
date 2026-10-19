@@ -2,6 +2,20 @@
 
 _Last updated: 2026-10-19_
 
+## 2026-10-19: "Dusk" visual redesign (branch `redesign/dusk`)
+
+Visual redesign only; content, links, form and behaviour unchanged. Direction and palette are in `DESIGN-NOTES.md`; they **replace** the "drawing set" design notes further down this file.
+
+- Hero is now the full-screen house photo (`public/images/house-dusk.jpg`, from the client's "house landing page.png"), with a dusk gradient, slow zoom-in and gentle parallax.
+- Fonts: Bodoni Moda (headings, italics for emphasis) + Schibsted Grotesk (body and labels). Archivo and IBM Plex Mono removed.
+- Palette sampled from the photo: plaster, door black, dusk slate, timber, window glow, brick. Tokens in `src/app/globals.css` (`oxide` renamed to `timber`/`glow`; new `dusk`, `dusk-2`, `brick`).
+- Dark sections use `.dusk-light` / `.dusk-light-side` (warm light pool + faint timber slats); `.light-line` echoes the porch LED strip.
+- Header floats over the photo with light text, turns to plaster on scroll.
+- Removed: hero line drawing (`hero-drawing.tsx`), graph paper textures, sheet numbers (A-01...), monospace labels.
+- No em/en dashes anywhere in site text.
+- Checks: eslint 0, production build OK, no horizontal scroll at 390/820/1440, interactions re-tested, axe clean except the decorative footer watermark, CLS 0, LCP about 2.1 s locally.
+- Note: the hero photo is a render supplied by the client; its alt text describes it without claiming it is a Build Studio project.
+
 Read this file and `reference-analysis.md` at the start of every session, then inspect the code before continuing.
 
 ## Status

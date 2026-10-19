@@ -19,7 +19,7 @@ export function Contact() {
           <div className="lg:sticky lg:top-[calc(var(--header-h)+2.5rem)]">
             <SectionHeading
               id="contact-title"
-              sheet="A-06"
+              index="05"
               eyebrow={contactSection.eyebrow}
               heading={contactSection.heading}
               intro={contactSection.body}
@@ -31,9 +31,9 @@ export function Contact() {
                     <a
                       href={href}
                       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                      className="group grid grid-cols-[2.5rem_1fr_auto] items-center gap-2 py-5 transition-colors duration-300 hover:text-oxide"
+                      className="group grid grid-cols-[2.5rem_1fr_auto] items-center gap-2 py-5 transition-colors duration-300 hover:text-timber"
                     >
-                      <Icon size={18} className="text-muted transition-colors duration-300 group-hover:text-oxide" />
+                      <Icon size={18} className="text-muted transition-colors duration-300 group-hover:text-timber" />
                       <span className="grid gap-1">
                         <span className="label text-muted">{label}</span>
                         <span className="text-[1.05rem]">{value}</span>

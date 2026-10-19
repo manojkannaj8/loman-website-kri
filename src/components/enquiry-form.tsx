@@ -43,7 +43,7 @@ function Field({
         {label}
         {required ? (
           <>
-            <span aria-hidden="true" className="text-oxide">*</span>
+            <span aria-hidden="true" className="text-timber">*</span>
             <span className="sr-only">(required)</span>
           </>
         ) : null}
@@ -53,14 +53,14 @@ function Field({
         <p id={`${id}-hint`} className="text-[0.8rem] text-muted">{hint}</p>
       ) : null}
       {error ? (
-        <p id={`${id}-error`} className="text-[0.85rem] text-oxide">{error}</p>
+        <p id={`${id}-error`} className="text-[0.85rem] text-timber">{error}</p>
       ) : null}
     </div>
   );
 }
 
 const inputClass =
-  "h-12 w-full border border-line-strong bg-paper px-4 text-[1rem] text-ink placeholder:text-muted/70 transition-colors duration-200 hover:border-ink focus:border-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 aria-[invalid=true]:border-oxide";
+  "h-12 w-full border border-line-strong bg-paper px-4 text-[1rem] text-ink placeholder:text-muted/70 transition-colors duration-200 hover:border-ink focus:border-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 aria-[invalid=true]:border-timber";
 
 export function EnquiryForm() {
   const uid = useId();
@@ -168,10 +168,10 @@ export function EnquiryForm() {
     errors[name] ? `${id(name)}-error` : hint ? `${id(name)}-hint` : undefined;
 
   return (
-    <div id={ENQUIRY_ID} className="scroll-mt-[calc(var(--header-h)+1rem)] border border-line-strong bg-paper">
-      <div className="flex items-center justify-between border-b border-line-strong px-5 py-3 sm:px-8">
-        <p className="label text-oxide">{contactSection.formEyebrow}</p>
-        <p className="label text-muted">A-06.1</p>
+    <div id={ENQUIRY_ID} className="scroll-mt-[calc(var(--header-h)+1rem)] bg-paper shadow-[0_30px_60px_-30px_rgb(29_26_23/0.35)]">
+      <div className="flex items-center gap-3 border-b border-line px-5 py-4 sm:px-8">
+        <span className="h-px w-8 bg-timber" aria-hidden="true" />
+        <p className="label text-timber">{contactSection.formEyebrow}</p>
       </div>
 
       <AnimatePresence mode="wait" initial={false}>
@@ -185,7 +185,7 @@ export function EnquiryForm() {
             className="grid gap-6 p-6 sm:p-10"
             role="status"
           >
-            <span className="grid h-14 w-14 place-items-center bg-ink text-paper">
+            <span className="grid h-14 w-14 place-items-center bg-dusk text-glow">
               <Check size={26} />
             </span>
             <h3 className="font-display text-[2rem] font-medium leading-tight">Thanks, your enquiry is in.</h3>
@@ -339,14 +339,14 @@ export function EnquiryForm() {
                 }}
                 onDragLeave={() => setDragging(false)}
                 onDrop={onDrop}
-                className={`relative grid place-items-center gap-2 border border-dashed px-6 py-8 text-center transition-colors duration-300 has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-oxide ${
-                  dragging ? "border-oxide bg-oxide/5" : errors.plans ? "border-oxide" : "border-line-strong hover:border-ink"
+                className={`relative grid place-items-center gap-2 border border-dashed px-6 py-8 text-center transition-colors duration-300 has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-timber ${
+                  dragging ? "border-timber bg-timber/5" : errors.plans ? "border-timber" : "border-line-strong hover:border-ink"
                 }`}
               >
-                <Upload size={22} className={dragging ? "text-oxide" : "text-muted"} />
+                <Upload size={22} className={dragging ? "text-timber" : "text-muted"} />
                 <p className="text-[0.95rem]">
                   <span className="font-medium">Drag &amp; drop your plans here</span> or{" "}
-                  <label htmlFor={`${uid}-plans`} className="cursor-pointer text-oxide underline underline-offset-4">
+                  <label htmlFor={`${uid}-plans`} className="cursor-pointer text-timber underline underline-offset-4">
                     browse files
                   </label>
                 </p>
@@ -367,7 +367,7 @@ export function EnquiryForm() {
                 />
               </div>
               {errors.plans ? (
-                <p id={`${uid}-plans-error`} className="text-[0.85rem] text-oxide" role="alert">
+                <p id={`${uid}-plans-error`} className="text-[0.85rem] text-timber" role="alert">
                   {errors.plans}
                 </p>
               ) : null}
@@ -375,9 +375,9 @@ export function EnquiryForm() {
                 <ul className="grid gap-2" aria-label="Attached plans">
                   {files.map((f, i) => (
                     <li key={`${f.name}-${f.size}`} className="flex items-center gap-3 border border-line px-3 py-2 text-[0.9rem]">
-                      <FileDoc size={18} className="shrink-0 text-oxide" />
+                      <FileDoc size={18} className="shrink-0 text-timber" />
                       <span className="min-w-0 flex-1 truncate">{f.name}</span>
-                      <span className="font-mono text-[0.75rem] text-muted">{formatBytes(f.size)}</span>
+                      <span className="text-[0.8rem] tabular-nums text-muted">{formatBytes(f.size)}</span>
                       <button
                         type="button"
                         onClick={() => removeFile(i)}
@@ -394,15 +394,15 @@ export function EnquiryForm() {
 
             <div aria-live="polite" className="empty:hidden">
               {status.kind === "error" ? (
-                <div className="grid gap-2 border-l-2 border-oxide bg-oxide/5 px-4 py-3 text-[0.95rem]" role="alert">
+                <div className="grid gap-2 border-l-2 border-timber bg-timber/5 px-4 py-3 text-[0.95rem]" role="alert">
                   <p>{status.message}</p>
                   <p className="text-muted">
                     You can also{" "}
-                    <a href={mailtoFallback} className="text-oxide underline underline-offset-4">
+                    <a href={mailtoFallback} className="text-timber underline underline-offset-4">
                       email {contact.email}
                     </a>{" "}
                     or{" "}
-                    <a href={contact.whatsappHref} target="_blank" rel="noopener noreferrer" className="text-oxide underline underline-offset-4">
+                    <a href={contact.whatsappHref} target="_blank" rel="noopener noreferrer" className="text-timber underline underline-offset-4">
                       message on WhatsApp
                     </a>
                     .

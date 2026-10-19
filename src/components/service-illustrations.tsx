@@ -26,7 +26,7 @@ function Construction() {
           key={`n${x}`}
           d={`M${x + 8} ${i % 2 ? 84 : 92}H${x + 40}`}
           {...line(0.6 + i * 0.05, 0.4)}
-          stroke="var(--oxide-bright)"
+          stroke="var(--glow)"
         />
       ))}
     </g>
@@ -53,7 +53,7 @@ function ProjectManagement() {
           y={30 + i * 34}
           height="14"
           width={b.w}
-          fill={i === 2 ? "var(--oxide-bright)" : "currentColor"}
+          fill={i === 2 ? "var(--glow)" : "currentColor"}
           fillOpacity={i === 2 ? 1 : 0.85}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -62,7 +62,7 @@ function ProjectManagement() {
         />
       ))}
       <motion.path d="M100 44V112H140" stroke="currentColor" fill="none" strokeDasharray="3 3" {...line(0.7, 0.6)} />
-      <motion.path d="M205 14V166" stroke="var(--oxide-bright)" strokeWidth="1.2" {...line(0.9, 0.6)} />
+      <motion.path d="M205 14V166" stroke="var(--glow)" strokeWidth="1.2" {...line(0.9, 0.6)} />
     </g>
   );
 }
@@ -84,7 +84,7 @@ function QuantitySurveying() {
           <path d={`M178 ${y}H196M213 ${y}H230M248 ${y}H272`} strokeOpacity="0.6" />
         </motion.g>
       ))}
-      <motion.path d="M240 142H272M240 146H272" stroke="var(--oxide-bright)" strokeWidth="1.2" {...line(1, 0.5)} />
+      <motion.path d="M240 142H272M240 146H272" stroke="var(--glow)" strokeWidth="1.2" {...line(1, 0.5)} />
     </g>
   );
 }

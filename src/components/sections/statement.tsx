@@ -3,12 +3,11 @@
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useRef } from "react";
 import { statement } from "@/lib/content";
-import { Monogram } from "../logo";
 
 function Word({ word, progress, range, accent }: { word: string; progress: MotionValue<number>; range: [number, number]; accent?: boolean }) {
   const opacity = useTransform(progress, range, [0.16, 1]);
   return (
-    <motion.span style={{ opacity }} className={`scroll-word ${accent ? "text-oxide-bright" : ""}`}>
+    <motion.span style={{ opacity }} className={`scroll-word ${accent ? "italic font-normal text-glow" : ""}`}>
       {word}{" "}
     </motion.span>
   );
@@ -24,16 +23,13 @@ export function Statement() {
   const words = [...lead.map((w) => ({ w, accent: false })), ...emphasis.map((w) => ({ w, accent: true }))];
 
   return (
-    <section aria-label="Our promise" className="on-ink relative overflow-hidden bg-ink text-paper">
-      <div className="grid-paper pointer-events-none absolute inset-0 opacity-70" />
-      <Monogram className="pointer-events-none absolute -right-16 top-1/2 h-[28rem] w-[28rem] -translate-y-1/2 text-paper/[0.035]" />
+    <section aria-label="Our promise" className="on-ink dusk-light relative overflow-hidden text-paper">
       <div ref={ref} className="container-x relative py-28 lg:py-44">
         <p className="label mb-10 flex items-center gap-3 text-muted-on-ink">
-          <span className="text-oxide-bright">A-02</span>
-          <span className="h-px w-8 bg-line-on-ink" aria-hidden="true" />
+          <span className="light-line h-px w-10" aria-hidden="true" />
           <span>How every project runs</span>
         </p>
-        <p className="font-display max-w-[20ch] text-[clamp(2.2rem,6vw,5.4rem)] font-medium leading-[1.02]">
+        <p className="font-display max-w-[19ch] text-[clamp(2.4rem,6.4vw,5.8rem)] leading-[1.02]">
           {words.map(({ w, accent }, i) => (
             <Word
               key={i}

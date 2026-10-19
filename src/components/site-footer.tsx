@@ -6,14 +6,15 @@ import { StartProjectLink } from "./start-project-link";
 export function SiteFooter() {
   return (
     <footer className="on-ink relative overflow-hidden bg-ink text-paper">
+      <div className="light-line absolute inset-x-0 top-0 h-px opacity-60" aria-hidden="true" />
       <div className="container-x relative grid gap-14 pb-10 pt-20 lg:pt-28">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <Monogram className="h-12 w-12 text-oxide-bright" />
-            <p className="font-display mt-8 max-w-[16ch] text-[clamp(2rem,4vw,3.25rem)] font-medium leading-[1.02]">
-              Building exceptional homes, under one roof.
+            <Monogram className="h-12 w-12 text-glow" />
+            <p className="font-display mt-8 max-w-[16ch] text-[clamp(2.2rem,4.4vw,3.6rem)] leading-[1.02]">
+              Building exceptional homes, <em className="text-glow">under one roof.</em>
             </p>
-            <StartProjectLink className="label mt-8 inline-flex items-center gap-3 border-b border-oxide-bright pb-2 text-paper transition-colors hover:text-oxide-bright">
+            <StartProjectLink className="label mt-8 inline-flex items-center gap-3 border-b border-glow pb-2 text-paper transition-colors hover:text-glow">
               Start a project
             </StartProjectLink>
           </div>
@@ -23,13 +24,13 @@ export function SiteFooter() {
             <ul className="grid gap-3">
               {nav.map((n) => (
                 <li key={n.href}>
-                  <a href={n.href} className="transition-colors hover:text-oxide-bright">
+                  <a href={n.href} className="transition-colors hover:text-glow">
                     {n.label}
                   </a>
                 </li>
               ))}
               <li>
-                <a href="#contact" className="transition-colors hover:text-oxide-bright">
+                <a href="#contact" className="transition-colors hover:text-glow">
                   Contact
                 </a>
               </li>
@@ -40,12 +41,12 @@ export function SiteFooter() {
             <p className="label mb-5 text-muted-on-ink">Contact</p>
             <ul className="grid gap-3">
               <li>
-                <a href={contact.phoneHref} className="transition-colors hover:text-oxide-bright">
+                <a href={contact.phoneHref} className="transition-colors hover:text-glow">
                   {contact.phoneDisplay}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${contact.email}`} className="transition-colors hover:text-oxide-bright">
+                <a href={`mailto:${contact.email}`} className="transition-colors hover:text-glow">
                   {contact.email}
                 </a>
               </li>
@@ -56,7 +57,7 @@ export function SiteFooter() {
 
         <p
           aria-hidden="true"
-          className="font-display min-w-0 select-none overflow-hidden whitespace-nowrap text-[min(10.6vw,9.6rem)] font-semibold uppercase leading-[0.8] tracking-[-0.04em] text-paper/[0.06]"
+          className="font-display min-w-0 select-none overflow-hidden whitespace-nowrap text-[min(13.2vw,12rem)] italic leading-[0.85] tracking-[-0.03em] text-paper/[0.07]"
         >
           {site.name}
         </p>

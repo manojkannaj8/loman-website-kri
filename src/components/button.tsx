@@ -1,22 +1,23 @@
 import type { ReactNode } from "react";
 
-type Variant = "solid" | "outline" | "oxide" | "ghost-ink";
+type Variant = "solid" | "outline" | "glow" | "ghost-ink";
 
 const base =
-  "group/btn relative inline-flex items-center justify-center gap-3 overflow-hidden px-6 h-12 label !text-[0.72rem] font-medium transition-colors duration-300 select-none";
+  "group/btn relative inline-flex min-h-12 items-center justify-center gap-3 px-6 py-3 label transition-[background-color,color,border-color,box-shadow] duration-300 select-none cursor-pointer";
 
 const variants: Record<Variant, string> = {
-  solid: "bg-ink text-paper hover:bg-oxide",
-  oxide: "bg-oxide text-paper hover:bg-ink",
+  solid: "bg-ink text-paper hover:bg-timber",
   outline: "border border-line-strong text-ink hover:border-ink hover:bg-ink hover:text-paper",
-  "ghost-ink": "border border-line-on-ink text-paper hover:border-paper hover:bg-paper hover:text-ink",
+  // Lamp-light button for dark backgrounds; it warms up on hover.
+  glow: "bg-glow text-ink hover:bg-[#f7cb92] hover:shadow-[0_0_0_1px_rgb(242_184_114/0.6),0_10px_40px_-6px_rgb(242_184_114/0.55)]",
+  "ghost-ink": "border border-paper/40 text-paper backdrop-blur-[2px] hover:border-paper hover:bg-paper hover:text-ink",
 };
 
 export function buttonClass(variant: Variant = "solid", extra = "") {
   return `${base} ${variants[variant]} ${extra}`;
 }
 
-/** Arrow that slides across on hover — shared button affordance. */
+/** Arrow that slides across on hover: shared button affordance. */
 export function ButtonArrow({ children }: { children: ReactNode }) {
   return (
     <span className="relative inline-flex h-4 w-4 overflow-hidden" aria-hidden="true">

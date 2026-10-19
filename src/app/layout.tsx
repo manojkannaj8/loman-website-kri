@@ -1,19 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, IBM_Plex_Mono } from "next/font/google";
+import { Bodoni_Moda, Schibsted_Grotesk } from "next/font/google";
 import { site } from "@/lib/content";
 import "./globals.css";
 
-const archivo = Archivo({
-  variable: "--font-archivo",
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
   subsets: ["latin"],
-  axes: ["wdth"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
+const schibsted = Schibsted_Grotesk({
+  variable: "--font-schibsted",
   subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -41,16 +41,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f1eee8",
+  themeColor: "#1e242c",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IE" className={`${archivo.variable} ${plexMono.variable} antialiased`}>
+    <html lang="en-IE" className={`${bodoni.variable} ${schibsted.variable} antialiased`}>
       <body className="min-h-dvh">
-        {/* Without JS, entrance animations never run — show their content as-is. */}
+        {/* Without JS, entrance animations never run: show their content as-is. */}
         <noscript>
           <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important}`}</style>
         </noscript>

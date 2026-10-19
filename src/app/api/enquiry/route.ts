@@ -3,9 +3,9 @@ import { validateFields, validatePlans, type EnquiryFields } from "@/lib/enquiry
 
 // Receives the enquiry form (multipart/form-data) and emails it to the
 // practice via Resend's REST API. Configure with:
-//   RESEND_API_KEY   — required to actually send
-//   ENQUIRY_TO       — recipient, defaults to the public contact address
-//   ENQUIRY_FROM     — verified sender, e.g. "Build Studio <website@buildstudio.ie>"
+//   RESEND_API_KEY  : required to actually send
+//   ENQUIRY_TO      : recipient, defaults to the public contact address
+//   ENQUIRY_FROM    : verified sender, e.g. "Build Studio <website@buildstudio.ie>"
 
 function text(form: FormData, key: string) {
   const v = form.get(key);
@@ -45,8 +45,8 @@ export async function POST(request: Request) {
   const body = [
     `Name: ${fields.name}`,
     `Email: ${fields.email}`,
-    `Phone: ${fields.phone || "—"}`,
-    `Location: ${fields.location || "—"}`,
+    `Phone: ${fields.phone || "Not given"}`,
+    `Location: ${fields.location || "Not given"}`,
     `Project type: ${fields.projectType}`,
     "",
     "About the project:",
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     if (process.env.NODE_ENV !== "production") {
-      console.info("[enquiry] RESEND_API_KEY not set — enquiry logged only:\n" + body);
+      console.info("[enquiry] RESEND_API_KEY not set: enquiry logged only:\n" + body);
       return Response.json({ ok: true, delivered: false });
     }
     console.error("[enquiry] RESEND_API_KEY is not configured; enquiry could not be sent.");
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
       from: process.env.ENQUIRY_FROM ?? "Build Studio Website <onboarding@resend.dev>",
       to: [process.env.ENQUIRY_TO ?? contact.email],
       reply_to: fields.email,
-      subject: `New enquiry: ${fields.projectType} — ${fields.name}`,
+      subject: `New enquiry: ${fields.projectType}, ${fields.name}`,
       text: body,
       attachments,
     }),

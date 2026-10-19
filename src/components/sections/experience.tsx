@@ -28,7 +28,7 @@ export function Experience() {
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <SectionHeading
             id="experience-title"
-            sheet="A-04"
+            index="03"
             eyebrow="Experience"
             heading={experience.heading}
             intro={experience.intro}
@@ -53,7 +53,7 @@ export function Experience() {
                       }`}
                     >
                       {f}
-                      <span className={on ? "text-oxide-bright" : "text-muted"}>{counts.get(f) ?? 0}</span>
+                      <span className={on ? "text-glow" : "text-muted"}>{counts.get(f) ?? 0}</span>
                     </button>
                   );
                 })}
@@ -90,7 +90,7 @@ export function Experience() {
                       className="group border-b border-line max-md:grid max-md:grid-cols-[1fr_auto] max-md:gap-x-4 max-md:gap-y-1 max-md:py-5"
                     >
                       <th scope="row" className="py-6 pr-6 align-top font-normal max-md:p-0">
-                        <span className="font-display block text-[1.2rem] font-medium leading-snug transition-colors duration-300 group-hover:text-oxide">
+                        <span className="font-display opsz-text block text-[1.25rem] leading-snug transition-colors duration-300 group-hover:text-timber">
                           {p.name}
                         </span>
                         {p.place ? <span className="mt-1 block text-[0.85rem] text-muted">{p.place}</span> : null}
@@ -104,10 +104,10 @@ export function Experience() {
                         {p.scope}
                       </td>
                       <td className="py-6 text-right align-top max-md:order-2 max-md:p-0">
-                        <span className="font-display block text-[1.2rem] font-medium tabular-nums">{formatEuro(p.value)}</span>
+                        <span className="font-display opsz-text block text-[1.25rem] tabular-nums">{formatEuro(p.value)}</span>
                         <span className="ml-auto mt-3 block h-[3px] w-full max-w-[9rem] bg-line max-md:hidden" aria-hidden="true">
                           <motion.span
-                            className="block h-full origin-left bg-oxide"
+                            className="block h-full origin-left bg-timber"
                             style={{ width: barWidth(p.value) }}
                             initial={{ scaleX: 0 }}
                             whileInView={{ scaleX: 1 }}

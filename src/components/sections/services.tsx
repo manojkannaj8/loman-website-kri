@@ -25,7 +25,7 @@ function ServicePanel({ service, total }: { service: Service; total: number }) {
   return (
     <div className="grid h-full grid-rows-[auto_1fr_auto] gap-8 p-6 sm:p-10">
       <div className="flex items-center justify-between">
-        <p className="label text-oxide-bright">Service {service.index}</p>
+        <p className="label text-glow">Service {service.index}</p>
         <p className="label text-muted-on-ink">
           {service.index} / 0{total}
         </p>
@@ -66,7 +66,7 @@ export function Services() {
       <div className="container-x">
         <SectionHeading
           id="services-title"
-          sheet="A-03"
+          index="02"
           eyebrow="Services"
           heading={services.heading}
           intro={services.intro}
@@ -99,11 +99,11 @@ export function Services() {
                   {selected ? (
                     <motion.span
                       layoutId="service-indicator"
-                      className="absolute -left-4 top-0 h-full w-[3px] bg-oxide"
+                      className="absolute -left-4 top-0 h-full w-[3px] bg-timber"
                       transition={{ duration: 0.5, ease: EASE }}
                     />
                   ) : null}
-                  <span className={`font-mono text-[0.8rem] ${selected ? "text-oxide" : "text-muted"}`}>{s.index}</span>
+                  <span className={`font-display opsz-text text-[1.05rem] italic ${selected ? "text-timber" : "text-muted"}`}>{s.index}</span>
                   <span className="font-display text-[clamp(1.6rem,2.6vw,2.4rem)] font-medium leading-none">
                     {s.title}
                   </span>
@@ -121,15 +121,14 @@ export function Services() {
               <p className="max-w-[34ch] leading-relaxed text-muted">
                 Not sure which suits your project? Describe it and Loman will advise.
               </p>
-              <StartProjectLink className="label inline-flex w-fit items-center gap-3 border-b border-oxide pb-2 text-ink transition-colors hover:text-oxide">
+              <StartProjectLink className="label inline-flex w-fit items-center gap-3 border-b border-timber pb-2 text-ink transition-colors hover:text-timber">
                 Start a conversation
                 <ArrowRight size={14} />
               </StartProjectLink>
             </div>
           </div>
 
-          <div className="on-ink relative col-span-7 min-h-[34rem] overflow-hidden bg-ink text-paper">
-            <div className="grid-paper pointer-events-none absolute inset-0" />
+          <div className="on-ink dusk-light-side relative col-span-7 min-h-[34rem] overflow-hidden text-paper">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={items[active].id}
@@ -152,11 +151,10 @@ export function Services() {
         <div className="mt-12 grid gap-4 lg:hidden">
           {items.map((s, i) => (
             <Reveal key={s.id} delay={i * 0.05}>
-              <article aria-labelledby={`m-${s.id}`} className="on-ink relative overflow-hidden bg-ink text-paper">
-                <div className="grid-paper pointer-events-none absolute inset-0" />
+              <article aria-labelledby={`m-${s.id}`} className="on-ink dusk-light-side relative overflow-hidden text-paper">
                 <div className="relative grid gap-6 p-6 sm:p-8">
                   <div className="flex items-center justify-between">
-                    <p className="label text-oxide-bright">Service {s.index}</p>
+                    <p className="label text-glow">Service {s.index}</p>
                     <ServiceIllustration id={s.id} className="w-28 text-paper/70" />
                   </div>
                   <h3 id={`m-${s.id}`} className="font-display text-[1.9rem] font-medium leading-tight">

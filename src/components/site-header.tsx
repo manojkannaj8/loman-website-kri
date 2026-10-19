@@ -41,6 +41,8 @@ export function SiteHeader() {
   const active = useActiveSection();
   const menuButton = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
+  // Over the hero photo the header is see-through with light text.
+  const light = !scrolled && !open;
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -104,7 +106,7 @@ export function SiteHeader() {
         }`}
       >
         <div className="container-x flex h-[var(--header-h)] items-center justify-between gap-6">
-          <a href="#top" className="relative z-10 -m-2 p-2 text-ink" aria-label="Build Studio — back to top">
+          <a href="#top" className={`relative z-10 -m-2 p-2 transition-colors duration-500 ${light ? "text-paper" : "text-ink"}`} aria-label="Build Studio, back to top">
             <Wordmark />
           </a>
 
@@ -118,14 +120,16 @@ export function SiteHeader() {
                       href={item.href}
                       aria-current={isActive ? "true" : undefined}
                       className={`label relative block px-4 py-3 transition-colors duration-300 ${
-                        isActive ? "text-ink" : "text-muted hover:text-ink"
+                        light
+                          ? isActive ? "text-paper" : "text-paper/80 hover:text-paper"
+                          : isActive ? "text-ink" : "text-muted hover:text-ink"
                       }`}
                     >
                       {item.label}
                       {isActive ? (
                         <motion.span
                           layoutId="nav-active"
-                          className="absolute inset-x-4 bottom-1.5 h-px bg-oxide"
+                          className={`absolute inset-x-4 bottom-1.5 h-px ${light ? "bg-glow" : "bg-timber"}`}
                           transition={{ duration: 0.5, ease: EASE }}
                         />
                       ) : null}
@@ -137,7 +141,7 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <StartProjectLink className={buttonClass("solid", "!hidden sm:!inline-flex !h-11 !px-5")}>
+            <StartProjectLink className={buttonClass(light ? "glow" : "solid", "!hidden sm:!inline-flex !min-h-11 !py-2 !px-5")}>
               Start a project
               <ButtonArrow>
                 <ArrowRight size={16} />
@@ -150,16 +154,16 @@ export function SiteHeader() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="relative z-10 grid h-11 w-11 place-items-center border border-line-strong lg:hidden"
+              className={`relative z-10 grid h-11 w-11 place-items-center border transition-colors duration-500 lg:hidden ${light ? "border-paper/45" : "border-line-strong"}`}
             >
               <span className="relative block h-3 w-5" aria-hidden="true">
                 <span
-                  className={`absolute left-0 h-px w-5 bg-ink transition-all duration-300 ${
+                  className={`absolute left-0 h-px w-5 transition-all ${light ? "bg-paper" : "bg-ink"} duration-300 ${
                     open ? "top-1.5 rotate-45" : "top-0"
                   }`}
                 />
                 <span
-                  className={`absolute left-0 h-px w-5 bg-ink transition-all duration-300 ${
+                  className={`absolute left-0 h-px w-5 transition-all ${light ? "bg-paper" : "bg-ink"} duration-300 ${
                     open ? "top-1.5 -rotate-45" : "top-3"
                   }`}
                 />
