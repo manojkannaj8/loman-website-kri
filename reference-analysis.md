@@ -13,7 +13,7 @@
 > - **Footer**: blurb, "Where we work", "© 2026 Build Studio Projects Limited. All rights reserved.", "Registered in Ireland, No. 825559 · Privacy".
 > - **Privacy page** at /privacy.
 > - WhatsApp pre-filled message no longer names Loman.
-> - Not adopted: the live site's full-width "showcase" interior photo and its official logo PNGs, because downloading them needs the client's say-so (see updates.md). The live site also uses Cloudflare Turnstile and stores uploads; this build does neither, so its privacy notice says so.
+> - Official logo PNGs are now used (see updates.md). The live site's "showcase" interior image is only a placeholder graphic, so it is not used. The live site also uses Cloudflare Turnstile and stores uploads; this build does neither, so its privacy notice says so.
 
 Source: `kri-freelance-site-vid.mp4` (51.7 s, 1280×688, screen recording of a Next.js 16 site running on `localhost:3000`).
 Frames were extracted at 1 fps, plus 4 fps from 32–37 s (the enquiry modal), and read one by one.

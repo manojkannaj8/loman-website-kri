@@ -215,7 +215,8 @@ header .intro-fade {
 /*
   The drawing runs in CSS so it starts at first paint, before JavaScript.
   Timeline (s): guides 0 to 1.1, strokes traced 0.15 to 1.6, thickened
-  1.4 to 2.0, wordmark 1.45 to 2.35. The handoff in intro.tsx starts at 2.3.
+  1.4 to 2.0, wordmark 1.45 to 2.35, official mark fades in 1.75 to 2.55
+  as the lines fade. The handoff in intro.tsx starts at 2.6.
 */
 html[data-intro="play"] .intro-guide-h,
 html[data-intro="play"] .intro-guide-v {
@@ -243,9 +244,30 @@ html[data-intro="play"] .intro-path {
 
 html[data-intro="play"] .intro-word {
   opacity: 0;
-  letter-spacing: 0.7em;
   transform: translateY(6px);
   animation: intro-word 0.9s var(--ease-out-expo) 1.45s forwards;
+}
+
+/* The official bronze mark settles in as the traced lines finish. */
+html[data-intro="play"] .intro-official {
+  opacity: 0;
+  animation: intro-in 0.8s ease 1.75s forwards;
+}
+
+html[data-intro="play"] .intro-lines {
+  animation: intro-out 0.6s ease 2.1s forwards;
+}
+
+@keyframes intro-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-out {
+  to {
+    opacity: 0;
+  }
 }
 
 /* Tailwind's centring uses the separate `translate` property, so only scale animates here. */
@@ -280,7 +302,6 @@ html[data-intro="play"] .intro-word {
 @keyframes intro-word {
   to {
     opacity: 1;
-    letter-spacing: 0.42em;
     transform: none;
   }
 }

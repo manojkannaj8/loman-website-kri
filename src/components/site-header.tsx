@@ -106,7 +106,10 @@ export function SiteHeader() {
         }`}
       >
         <div className="container-x flex h-[var(--header-h)] items-center justify-between gap-6">
-          <a href="#top" className={`relative z-10 -m-2 p-2 transition-colors duration-500 ${light ? "text-paper" : "text-ink"}`} aria-label="Build Studio, back to top">
+          <a href="#top" className={`relative z-10 -m-2 p-2 transition-colors duration-500 [&_.site-logo-mark]:transition-[filter] [&_.site-logo-mark]:duration-500 ${
+              // Lift the bronze mark a little while it sits over the dark hero photo.
+              light ? "text-paper [&_.site-logo-mark]:brightness-[1.45]" : "text-ink"
+            }`} aria-label="Build Studio, back to top">
             <Wordmark />
           </a>
 

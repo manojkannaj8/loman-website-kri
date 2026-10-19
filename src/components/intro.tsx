@@ -1,9 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { animate } from "motion/react";
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { site } from "@/lib/content";
 import { MARK } from "./logo";
+import officialMark from "../../public/images/logo/build-studio-monogram-bronze.png";
+import officialWordmark from "../../public/images/logo/build-studio-wordmark-bronze.png";
 import { EASE } from "./motion";
 
 /*
@@ -24,7 +27,7 @@ import { EASE } from "./motion";
 */
 
 /** Seconds after first paint when the handoff starts (drawing is done by then). */
-const HANDOFF_AT = 2.3;
+const HANDOFF_AT = 2.6;
 
 const IntroContext = createContext(true);
 
@@ -67,7 +70,7 @@ const strokes: { d: string; delay: number }[] = [
 
 function IntroOverlay({ onRelease }: { onRelease: () => void }) {
   const root = useRef<HTMLDivElement>(null);
-  const mark = useRef<SVGSVGElement>(null);
+  const mark = useRef<HTMLDivElement>(null);
   const fadeFirst = useRef<HTMLDivElement[]>([]);
   const exiting = useRef(false);
 
@@ -90,7 +93,7 @@ function IntroOverlay({ onRelease }: { onRelease: () => void }) {
         ).finished,
       ];
 
-      const target = document.querySelector<SVGSVGElement>("header .site-logo-mark");
+      const target = document.querySelector<HTMLElement>("header .site-logo-mark");
       if (mark.current && target) {
         const from = mark.current.getBoundingClientRect();
         const to = target.getBoundingClientRect();
@@ -101,7 +104,6 @@ function IntroOverlay({ onRelease }: { onRelease: () => void }) {
               x: to.left + to.width / 2 - (from.left + from.width / 2),
               y: to.top + to.height / 2 - (from.top + from.height / 2),
               scale: to.height / from.height,
-              color: getComputedStyle(target).color,
             },
             { duration, ease: EASE, delay: lead },
           ).finished,
@@ -147,19 +149,28 @@ function IntroOverlay({ onRelease }: { onRelease: () => void }) {
           ))}
         </div>
 
-        <svg
-          ref={mark}
-          viewBox={MARK.viewBox}
-          className="relative w-[clamp(4.5rem,13vw,7.5rem)] overflow-visible text-glow"
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="butt"
-          strokeLinejoin="miter"
-        >
-          {strokes.map((s) => (
-            <path key={s.d} d={s.d} pathLength={1} className="intro-path" style={{ "--d": `${s.delay}s` } as CSSProperties} />
-          ))}
-        </svg>
+        {/* Lines trace the mark, then the official bronze logo settles in over them. */}
+        <div ref={mark} className="relative aspect-[495/549] w-[clamp(4.5rem,13vw,7.5rem)]">
+          <svg
+            viewBox={MARK.viewBox}
+            className="intro-lines absolute inset-0 h-full w-full overflow-visible text-glow"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="butt"
+            strokeLinejoin="miter"
+          >
+            {strokes.map((s) => (
+              <path key={s.d} d={s.d} pathLength={1} className="intro-path" style={{ "--d": `${s.delay}s` } as CSSProperties} />
+            ))}
+          </svg>
+          <Image
+            src={officialMark}
+            alt=""
+            priority
+            sizes="(min-width: 1024px) 120px, 72px"
+            className="intro-official absolute inset-0 h-full w-full object-contain"
+          />
+        </div>
 
         <div
           ref={(el) => {
@@ -167,12 +178,13 @@ function IntroOverlay({ onRelease }: { onRelease: () => void }) {
           }}
           className="mt-7"
         >
-          <p
-            className="intro-word label whitespace-nowrap text-[clamp(0.72rem,1.6vw,0.85rem)] text-glow/90"
-            style={{ marginRight: "-0.42em" }}
-          >
-            {site.name}
-          </p>
+          <Image
+            src={officialWordmark}
+            alt={site.name}
+            priority
+            sizes="(min-width: 1024px) 240px, 180px"
+            className="intro-word h-auto w-[clamp(10rem,22vw,15rem)]"
+          />
         </div>
       </div>
     </div>

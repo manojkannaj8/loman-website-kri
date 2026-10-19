@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { site } from "@/lib/content";
+import officialMark from "../../public/images/logo/build-studio-monogram-bronze.png";
 
 /*
   Build Studio monogram, traced from the original logo in the reference video:
@@ -6,7 +8,8 @@ import { site } from "@/lib/content";
   bar doubles as the B's waist, the B has a chamfered notch at that waist,
   and a small gap separates it from the S's lower right tab. Drawn as
   centre-line strokes on a 64 x 72 grid so it can be animated as lines
-  (see intro.tsx).
+  (see intro.tsx). Everywhere the logo is simply shown, the official bronze
+  PNG (OfficialMark) is used instead; this tracing also drives the favicon.
 */
 export const MARK = {
   viewBox: "0 0 64 72",
@@ -40,10 +43,27 @@ export function Monogram({ className, title }: { className?: string; title?: str
   );
 }
 
+/**
+ * The client's official bronze monogram (public/images/logo, from the live
+ * preview). Decorative wherever the name is also written next to it.
+ */
+export function OfficialMark({ className = "", priority = false }: { className?: string; priority?: boolean }) {
+  return (
+    <Image
+      src={officialMark}
+      alt=""
+      aria-hidden="true"
+      priority={priority}
+      sizes="(min-width: 1024px) 64px, 48px"
+      className={className}
+    />
+  );
+}
+
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-3 ${className}`}>
-      <Monogram className="site-logo-mark h-7 w-[1.556rem] shrink-0" />
+      <OfficialMark priority className="site-logo-mark h-7 w-auto shrink-0" />
       <span className="intro-fade label !text-[0.72rem] !tracking-[0.32em] font-medium">{site.name}</span>
     </span>
   );
