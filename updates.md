@@ -150,3 +150,14 @@ Not tested: real email delivery (no Resend key), Safari/Firefox, physical touch 
 2. Create a Resend account, verify `buildstudio.ie`, set env vars, send a real test enquiry with a PDF.
 3. Decide hosting (Node host recommended for large plan uploads).
 4. Add a privacy notice covering enquiry data (GDPR) before launch.
+
+## 2026-10-19: Services imagery redesign (branch `redesign/services-imagery`)
+
+Why: in the previous Services layout the photos looked dull. Causes: (1) Next 16 only allows image quality 75 by default, so photos were re-encoded at 75; (2) the 3:2 photos were cropped to 5:4 / 4:5 and slightly zoomed (scale 1.04 on hidden frames), losing detail; (3) the desktop frame was larger than the source could serve sharply on high-density screens.
+
+- `next.config.ts`: `images.qualities: [75, 92]`; service photos use `quality={92}`.
+- Photos are now shown **whole at their native 3:2 ratio**, no crop, no zoom. Desktop frame is about 700 to 760 px wide, so a 2x screen gets the full 1536 px source (the optimiser caps requests at source size; checked: w=1920 returns 1536x1024 WebP).
+- Layout: three alternating editorial "spreads" (photo 7 columns, text 4 columns), each with a large italic index, title, summary and a ruled two-column scope list (one column under 420 px). Caption under each photo with service name and "01 / 03". The "Not sure which suits..." prompt moved up beside the section heading.
+- Motion: photos are uncovered with a soft clip-path wipe from the text side (1.3 s), no scaling. Off with reduced motion; `<noscript>` rule in `layout.tsx` removes clip-paths when JS is off.
+- Replaced the accordion: all three services are always fully visible (no hidden content, no hover/click needed).
+- Checks: build OK, eslint 0, no horizontal scroll or console errors at 390 (3x), 820 (2x) and 1440 (2x).

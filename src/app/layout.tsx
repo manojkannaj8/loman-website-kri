@@ -55,7 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: INTRO_BOOT_SCRIPT }} />
         {/* Without JS, entrance animations never run: show their content as-is. */}
         <noscript>
-          <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important}`}</style>
+          <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important}[style*="clip-path"]{clip-path:none!important}`}</style>
         </noscript>
         {children}
       </body>
