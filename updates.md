@@ -16,6 +16,18 @@ Visual redesign only; content, links, form and behaviour unchanged. Direction an
 - Checks: eslint 0, production build OK, no horizontal scroll at 390/820/1440, interactions re-tested, axe clean except the decorative footer watermark, CLS 0, LCP about 2.1 s locally.
 - Note: the hero photo is a render supplied by the client; its alt text describes it without claiming it is a Build Studio project.
 
+### Services section with photography (same branch)
+
+- Three client-supplied photos added: `public/images/service-construction.webp` (trades fitting out a kitchen), `service-project-management.webp` (client walkthrough with drawings and model), `service-quantity-surveying.webp` (costing desk: calculator, programme, drawings). Mapping chosen from what each image shows.
+- **Desktop (lg+):** editorial split. Left: the service index is now an **accordion** (one service open at a time; click or Enter to open, Up/Down/Home/End move between services). The open service shows its summary and scope tags inline. Right: one sticky 5:4 photo frame that crossfades (with a slight settle from 104% scale) to the open service's photo, with a caption, progress marks and "01 / 03" count beneath.
+- **Tablet (md):** each service as a two-column block, portrait 4:5 photo alternating left/right.
+- **Phone:** each service stacked: 3:2 photo, index, title, summary, tags.
+- Each photo has a `focus` crop point in `services.tsx` used for the tighter desktop and tablet crops.
+- Change in behaviour: hovering a service no longer switches it (an accordion that opens on hover makes the list jump under the cursor). Services switch on click/Enter instead.
+- Removed `service-illustrations.tsx` (line drawings replaced by photos).
+- Only the visible desktop photo carries alt text; hidden ones are `aria-hidden`. The caption announces the current service politely to screen readers.
+- Checks: production build OK, eslint 0, no horizontal scroll at 390/820/1440, no console errors, accordion and keyboard focus tested, rest of page regression-tested (filter, start-a-project focus, form validation and submit).
+
 Read this file and `reference-analysis.md` at the start of every session, then inspect the code before continuing.
 
 ## Status
