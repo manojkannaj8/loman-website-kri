@@ -7,7 +7,7 @@ import { SectionHeading } from "../section-heading";
 const channels = [
   { label: "Phone", value: contact.phoneDisplay, href: contact.phoneHref, Icon: Phone },
   { label: "Email", value: contact.email, href: `mailto:${contact.email}`, Icon: Mail },
-  { label: "WhatsApp", value: "Message Loman", href: contact.whatsappHref, Icon: WhatsApp, external: true },
+  { label: "WhatsApp", value: "Send a message", href: contact.whatsappHref, Icon: WhatsApp, external: true },
   { label: "Based in", value: contact.location, href: contact.mapsHref, Icon: Pin, external: true },
 ];
 
@@ -19,7 +19,7 @@ export function Contact() {
           <div className="lg:sticky lg:top-[calc(var(--header-h)+2.5rem)]">
             <SectionHeading
               id="contact-title"
-              index="05"
+              index="06"
               eyebrow={contactSection.eyebrow}
               heading={contactSection.heading}
               intro={contactSection.body}

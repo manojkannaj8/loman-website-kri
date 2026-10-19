@@ -24,12 +24,14 @@ export function StartProjectLink({ onNavigate, onClick, children, ...rest }: Pro
   function handle(e: MouseEvent<HTMLAnchorElement>) {
     onClick?.(e);
     if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    // On other pages (privacy) there is no form: let the link go to the home page.
+    if (!document.getElementById(ENQUIRY_ID)) return;
     e.preventDefault();
     onNavigate?.();
     focusEnquiry();
   }
   return (
-    <a href={`#${ENQUIRY_ID}`} onClick={handle} {...rest}>
+    <a href={`/#${ENQUIRY_ID}`} onClick={handle} {...rest}>
       {children}
     </a>
   );

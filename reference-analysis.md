@@ -1,5 +1,20 @@
 # Reference Analysis — Build Studio
 
+> **Update 2026-10-19: the client's live preview is now the source of truth.**
+> https://build-studio-preview.netlify.app was compared section by section with this build. Where it differs from the video notes below, the live preview wins:
+>
+> - **Removed** (not on the live site): founder name "Loman Byrne", founder photo, title and bio, "ATU Sligo", "SOLAS", the 11-project experience table and the former employers (Breffni Group, Quanmac Ltd, E.P. Lynam), "Rathcore" (now just "Enfield, Co. Meath").
+> - **About** is now "The experience behind Build Studio." with three new paragraphs; credentials are "BSc Construction Economics", "Qualified Carpenter", "Estimating, Tendering & Procurement", "Site Supervision & Buildability".
+> - **Experience** is now "Experience you can rely on.": six sectors (Residential, Commercial & Industrial, Education, Civil Engineering, Demolition, Rail Infrastructure) and three paragraphs.
+> - **New section "How we build / From plan to finished home."**: four steps (The Plan, The Structure, The Build, The Handover) shown with a three.js 3D house that builds itself, with previous/next and "Watch it again".
+> - **Stats**: third label is "Largest project".
+> - **Contact** intro: "Planning granted, or still at design stage? ..."; based in "Enfield, Co. Meath".
+> - **Form**: intro says "we'll get back to you"; project types are New build, Renovation, Extension, Commercial build / fit-out, Project management, Quantity surveying, Something else; privacy line under the button.
+> - **Footer**: blurb, "Where we work", "© 2026 Build Studio Projects Limited. All rights reserved.", "Registered in Ireland, No. 825559 · Privacy".
+> - **Privacy page** at /privacy.
+> - WhatsApp pre-filled message no longer names Loman.
+> - Not adopted: the live site's full-width "showcase" interior photo and its official logo PNGs, because downloading them needs the client's say-so (see updates.md). The live site also uses Cloudflare Turnstile and stores uploads; this build does neither, so its privacy notice says so.
+
 Source: `kri-freelance-site-vid.mp4` (51.7 s, 1280×688, screen recording of a Next.js 16 site running on `localhost:3000`).
 Frames were extracted at 1 fps, plus 4 fps from 32–37 s (the enquiry modal), and read one by one.
 

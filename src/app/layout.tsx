@@ -21,7 +21,7 @@ const schibsted = Schibsted_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Construction, Project Management & Quantity Surveying, Co. Meath`,
+    default: `${site.name} | Builders, Project Management & Quantity Surveying in Meath`,
     template: `%s | ${site.name}`,
   },
   description: site.description,

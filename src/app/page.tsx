@@ -5,29 +5,30 @@ import { About } from "@/components/sections/about";
 import { Contact } from "@/components/sections/contact";
 import { Experience } from "@/components/sections/experience";
 import { Hero } from "@/components/sections/hero";
+import { Process } from "@/components/sections/process";
 import { Services } from "@/components/sections/services";
 import { Statement } from "@/components/sections/statement";
 import { Why } from "@/components/sections/why";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { about, contact, site } from "@/lib/content";
+import { contact, site } from "@/lib/content";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "GeneralContractor",
   name: site.name,
+  legalName: site.legalName,
   description: site.description,
   url: site.url,
   telephone: "+353831140783",
   email: contact.email,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Rathcore, Enfield",
+    addressLocality: "Enfield",
     addressRegion: "Co. Meath",
     addressCountry: "IE",
   },
   areaServed: "Leinster",
-  founder: { "@type": "Person", name: about.founder.name, jobTitle: about.founder.title },
 };
 
 export default function Home() {
@@ -44,6 +45,7 @@ export default function Home() {
           <About />
           <Statement />
           <Services />
+          <Process />
           <Experience />
           <Why />
           <Contact />

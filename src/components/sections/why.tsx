@@ -6,7 +6,7 @@ export function Why() {
   return (
     <section id="why" aria-labelledby="why-title" className="on-ink dusk-light-side relative overflow-hidden py-24 text-paper lg:py-36">
       <div className="container-x relative">
-        <SectionHeading id="why-title" index="04" eyebrow={why.eyebrow} heading={why.heading} tone="ink" />
+        <SectionHeading id="why-title" index="05" eyebrow={why.eyebrow} heading={why.heading} tone="ink" />
 
         <ol className="mt-16 grid border-l border-t border-line-on-ink md:grid-cols-2 lg:mt-20">
           {why.items.map((item, i) => (

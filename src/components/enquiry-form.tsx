@@ -191,7 +191,7 @@ export function EnquiryForm() {
             <h3 className="font-display text-[2rem] font-medium leading-tight">Thanks, your enquiry is in.</h3>
             <p className="max-w-[46ch] leading-relaxed text-muted">
               {status.delivered
-                ? "Loman will be in touch. If it's urgent, call or WhatsApp on " + contact.phoneDisplay + "."
+                ? "We'll be in touch. If it's urgent, call or WhatsApp on " + contact.phoneDisplay + "."
                 : "This preview isn't connected to email yet, so the enquiry was only logged on the server. Please also email " +
                   contact.email +
                   "."}
@@ -426,6 +426,13 @@ export function EnquiryForm() {
                 </>
               )}
             </button>
+            <p className="-mt-3 text-[0.85rem] text-muted">
+              {contactSection.privacyNote} See our{" "}
+              <a href="/privacy" className="text-timber underline underline-offset-4">
+                privacy notice
+              </a>
+              .
+            </p>
           </motion.form>
         )}
       </AnimatePresence>

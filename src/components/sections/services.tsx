@@ -3,10 +3,8 @@
 import Image, { type StaticImageData } from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { services, type Service } from "@/lib/content";
-import { ArrowRight } from "../icons";
 import { EASE, Reveal } from "../motion";
 import { SectionHeading } from "../section-heading";
-import { StartProjectLink } from "../start-project-link";
 import constructionPhoto from "../../../public/images/service-construction.webp";
 import pmPhoto from "../../../public/images/service-project-management.webp";
 import qsPhoto from "../../../public/images/service-quantity-surveying.webp";
@@ -120,27 +118,13 @@ export function Services() {
   return (
     <section id="services" aria-labelledby="services-title" className="bg-paper-2 py-24 lg:py-36">
       <div className="container-x">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-          <SectionHeading
-            id="services-title"
-            index="02"
-            eyebrow="Services"
-            heading={services.heading}
-            intro={services.intro}
-            className="lg:col-span-7"
-          />
-          <Reveal className="lg:col-span-4 lg:col-start-9" delay={0.1}>
-            <div className="grid gap-4 border-l-2 border-timber pl-6">
-              <p className="leading-relaxed text-muted">
-                Not sure which suits your project? Describe it and Loman will advise.
-              </p>
-              <StartProjectLink className="label inline-flex w-fit items-center gap-3 border-b border-timber pb-2 text-ink transition-colors hover:text-timber">
-                Start a conversation
-                <ArrowRight size={14} />
-              </StartProjectLink>
-            </div>
-          </Reveal>
-        </div>
+        <SectionHeading
+          id="services-title"
+          index="02"
+          eyebrow="Services"
+          heading={services.heading}
+          intro={services.intro}
+        />
 
         <div className="mt-20 grid gap-24 sm:gap-28 lg:mt-28 lg:gap-40">
           {services.items.map((service, i) => (

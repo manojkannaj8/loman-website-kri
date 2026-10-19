@@ -161,3 +161,15 @@ Why: in the previous Services layout the photos looked dull. Causes: (1) Next 16
 - Motion: photos are uncovered with a soft clip-path wipe from the text side (1.3 s), no scaling. Off with reduced motion; `<noscript>` rule in `layout.tsx` removes clip-paths when JS is off.
 - Replaced the accordion: all three services are always fully visible (no hidden content, no hover/click needed).
 - Checks: build OK, eslint 0, no horizontal scroll or console errors at 390 (3x), 820 (2x) and 1440 (2x).
+
+## 2026-10-19: Match the client's live preview (branch `content/match-reference`)
+
+Source: https://build-studio-preview.netlify.app (see the update box at the top of `reference-analysis.md`).
+
+- **Content**: About, Experience, stats label, contact intro, form intro and project types, footer and WhatsApp message now match the live site. Removed the founder card and photo (`public/images/loman-byrne.jpg` deleted), the project table and employer names, Rathcore, and the "Loman will advise" line in Services.
+- **New "How we build" section** (`src/components/sections/process.tsx` + `src/components/house-scene.ts`): a three.js scene where a two-storey house is drawn as a floor plan, rises as wireframe walls, gets solid walls, cladding and a roof, then lights up. Autoplays once when scrolled into view; previous/next buttons and "Watch it again". three.js is loaded only when the section is near, and renders only while visible. Reduced motion: no autoplay or orbit, shows the finished house. If WebGL fails, the step list still shows.
+- **Privacy page** at `/privacy` (`src/app/privacy/page.tsx`), adapted to this build: Vercel hosting, Resend email, plans attached to email (not stored), no Turnstile. Client should review before launch. Added to the sitemap.
+- Footer links use `/#section` so they work from /privacy; `StartProjectLink` falls back to `/#enquiry` there. The logo intro now only plays on the home page.
+- Section numbers: About 01, Services 02, How we build 03, Experience 04, Why 05, Contact 06.
+- New dependency: `three` 0.182 (+ `@types/three`).
+- Pending client approval: the live site's official logo PNGs and its showcase interior photo were not downloaded.
