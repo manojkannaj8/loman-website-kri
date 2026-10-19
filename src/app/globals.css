@@ -177,3 +177,37 @@ select {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Logo intro (components/intro.tsx) */
+html {
+  scrollbar-gutter: stable; /* no layout jump when the intro releases scrolling */
+}
+
+.intro-overlay {
+  display: none;
+}
+
+html[data-intro="play"] {
+  overflow: hidden;
+  background: var(--ink); /* fills the reserved scrollbar gutter too */
+}
+
+html[data-intro="play"] .intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+/* The header mark is where the intro lands; it appears once the handoff completes. */
+html[data-intro="play"] header .site-logo-mark,
+html[data-intro="play"] header .intro-fade {
+  opacity: 0;
+}
+
+header .intro-fade {
+  transition: opacity 0.9s ease 0.15s;
+}

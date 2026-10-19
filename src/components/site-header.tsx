@@ -110,7 +110,7 @@ export function SiteHeader() {
             <Wordmark />
           </a>
 
-          <nav aria-label="Primary" className="hidden lg:block">
+          <nav aria-label="Primary" className="intro-fade hidden lg:block">
             <ul className="flex items-center gap-1">
               {nav.map((item) => {
                 const isActive = active === item.href.slice(1);
@@ -140,7 +140,7 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="intro-fade flex items-center gap-2">
             <StartProjectLink className={buttonClass(light ? "glow" : "solid", "!hidden sm:!inline-flex !min-h-11 !py-2 !px-5")}>
               Start a project
               <ButtonArrow>

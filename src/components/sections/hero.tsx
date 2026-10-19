@@ -7,19 +7,22 @@ import { hero, site } from "@/lib/content";
 import { ButtonArrow, buttonClass } from "../button";
 import { CountUp } from "../count-up";
 import { ArrowRight } from "../icons";
+import { useIntroReady } from "../intro";
 import { EASE } from "../motion";
 import { StartProjectLink } from "../start-project-link";
 import housePhoto from "../../../public/images/house-dusk.jpg";
 
-const rise = (delay: number) => ({
+// Entrance animations hold until the logo intro hands over (immediately when it is skipped).
+const rise = (ready: boolean, delay: number) => ({
   initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
+  animate: ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 },
   transition: { delay, duration: 1, ease: EASE },
 });
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const ready = useIntroReady();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   // Gentle parallax: the photo drifts slower than the page.
   const photoY = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["0%", "16%"]);
@@ -32,7 +35,7 @@ export function Hero() {
           <motion.div
             className="absolute inset-0"
             initial={{ scale: 1.08 }}
-            animate={{ scale: 1 }}
+            animate={{ scale: ready ? 1 : 1.08 }}
             transition={{ duration: 2.6, ease: EASE }}
           >
             <Image
@@ -54,7 +57,7 @@ export function Hero() {
         />
 
         <motion.div style={{ y: copyY }} className="container-x relative pb-14 pt-[calc(var(--header-h)+4rem)] sm:pb-20 lg:pb-24">
-          <motion.p {...rise(0.2)} className="label flex flex-wrap items-center gap-x-4 gap-y-2 text-paper/85">
+          <motion.p {...rise(ready, 0.2)} className="label flex flex-wrap items-center gap-x-4 gap-y-2 text-paper/85">
             {site.disciplines.map((d, i) => (
               <span key={d} className="inline-flex items-center gap-4">
                 {i > 0 ? <span className="h-3 w-px bg-glow/70" aria-hidden="true" /> : null}
@@ -71,7 +74,7 @@ export function Hero() {
               <motion.span
                 className="block"
                 initial={{ y: "105%" }}
-                animate={{ y: "0%" }}
+                animate={{ y: ready ? "0%" : "105%" }}
                 transition={{ delay: 0.25, duration: 1.2, ease: EASE }}
               >
                 {hero.headline}
@@ -81,7 +84,7 @@ export function Hero() {
               <motion.em
                 className="relative inline-block whitespace-nowrap pr-[0.08em] text-glow"
                 initial={{ y: "115%" }}
-                animate={{ y: "0%" }}
+                animate={{ y: ready ? "0%" : "115%" }}
                 transition={{ delay: 0.4, duration: 1.2, ease: EASE }}
               >
                 {hero.emphasis}
@@ -90,7 +93,7 @@ export function Hero() {
                   aria-hidden="true"
                   className="light-line absolute -bottom-[0.06em] left-0 h-[2px] w-full origin-left"
                   initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
+                  animate={{ scaleX: ready ? 1 : 0 }}
                   transition={{ delay: 1.2, duration: 1.4, ease: EASE }}
                 />
               </motion.em>
@@ -98,11 +101,11 @@ export function Hero() {
           </h1>
 
           <div className="mt-8 grid gap-8 lg:mt-10 lg:grid-cols-[minmax(0,34rem)_auto] lg:items-end lg:justify-between">
-            <motion.p {...rise(0.65)} className="max-w-[40ch] text-[1.125rem] leading-relaxed text-paper/85 sm:text-[1.2rem]">
+            <motion.p {...rise(ready, 0.65)} className="max-w-[40ch] text-[1.125rem] leading-relaxed text-paper/85 sm:text-[1.2rem]">
               {hero.sub}
             </motion.p>
 
-            <motion.div {...rise(0.8)} className="flex flex-wrap gap-3">
+            <motion.div {...rise(ready, 0.8)} className="flex flex-wrap gap-3">
               <StartProjectLink className={buttonClass("glow")}>
                 Start a project
                 <ButtonArrow>
@@ -119,7 +122,7 @@ export function Hero() {
 
       {/* Stats on a plaster band, the doorstep beneath the photo. */}
       <div className="border-b border-line bg-paper">
-        <motion.dl {...rise(0.9)} className="container-x grid grid-cols-2 lg:grid-cols-4">
+        <motion.dl {...rise(ready, 0.9)} className="container-x grid grid-cols-2 lg:grid-cols-4">
           <div className="col-span-2 flex flex-col justify-center gap-1 border-b border-line py-7 lg:col-span-1 lg:border-b-0 lg:border-r lg:py-10 lg:pr-8">
             <dt className="label text-timber">The practice</dt>
             <dd className="text-[1.05rem] leading-snug">

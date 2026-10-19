@@ -21,10 +21,11 @@ export default async function Image() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20, fontSize: 22, letterSpacing: 6 }}>
-          <svg width="48" height="48" viewBox="0 0 40 40">
-            <g fill="none" stroke="#ece7df" strokeWidth="3.2">
-              <path d="M35 4.5H5V20h30v15.5H5" />
-              <path d="M13 12.25h22M5 27.75h22" />
+          <svg width="44" height="50" viewBox="0 0 64 72">
+            <g fill="none" stroke="#f2b872" strokeWidth="6.75">
+              <path d="M60.6 18V3.4H3.4V34.5H43.5" />
+              <path d="M53 34.5H60.6V68.6H3.4V52" />
+              <path d="M41 34.5L45.5 30V21.5H17V53H45.5V39Z" />
             </g>
           </svg>
           BUILD STUDIO

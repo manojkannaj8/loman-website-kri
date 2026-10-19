@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Schibsted_Grotesk } from "next/font/google";
 import { site } from "@/lib/content";
+import { INTRO_BOOT_SCRIPT } from "@/lib/intro";
 import "./globals.css";
 
 const bodoni = Bodoni_Moda({
@@ -48,8 +49,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IE" className={`${bodoni.variable} ${schibsted.variable} antialiased`}>
+    <html lang="en-IE" className={`${bodoni.variable} ${schibsted.variable} antialiased`} suppressHydrationWarning>
       <body className="min-h-dvh">
+        {/* Decides before first paint whether the logo intro plays (see components/intro.tsx). */}
+        <script dangerouslySetInnerHTML={{ __html: INTRO_BOOT_SCRIPT }} />
         {/* Without JS, entrance animations never run: show their content as-is. */}
         <noscript>
           <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important}`}</style>

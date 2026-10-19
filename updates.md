@@ -28,6 +28,20 @@ Visual redesign only; content, links, form and behaviour unchanged. Direction an
 - Only the visible desktop photo carries alt text; hidden ones are `aria-hidden`. The caption announces the current service politely to screen readers.
 - Checks: production build OK, eslint 0, no horizontal scroll at 390/820/1440, no console errors, accordion and keyboard focus tested, rest of page regression-tested (filter, start-a-project focus, form validation and submit).
 
+### Logo redraw + opening logo animation (same branch)
+
+- **Logo:** no vector file exists, so the monogram was re-traced from the clearest frame of the original logo in the reference video (6.3 s) and checked side by side against it. It is a squared S wrapping the frame with a B inside: upper-right terminal, top bar, left column, middle bar (shared as the B's waist), a gap, right tab, right column, bottom bar, lower-left terminal; the B has a chamfered notch at its waist. Geometry lives in `MARK` in `src/components/logo.tsx` (64 x 72 grid, stroke 6.75) and is reused by the header, footer, favicon (`src/app/icon.svg`) and share image. Still worth swapping for the official vector when the client supplies it.
+- **Intro** (`src/components/intro.tsx`, boot script in `src/lib/intro.ts`, CSS at the end of `globals.css`):
+  1. Faint setting-out lines sweep across the screen along the mark's edges.
+  2. The S and B are traced as fine pencil lines (SVG `pathLength`), then thicken to full stroke weight.
+  3. "BUILD STUDIO" settles in beneath.
+  4. The wordmark clears, the mark flies into the header logo position (measured at run time) while the ink overlay lifts; the hero starts its own entrance at the same moment and the header links fade in.
+- Total roughly 3 to 4 seconds depending on load speed. Plays once per browser session (`sessionStorage` key `bs-intro-seen`). Skipped entirely with "reduce motion". Any key, click, wheel or touch skips straight to the handoff.
+- No flash or layout shift: an inline script in `layout.tsx` sets `html[data-intro]` to `play` or `skip` before first paint; the overlay only shows in `play`. `scrollbar-gutter: stable` keeps page width identical when scrolling is released. Measured CLS 0.
+- Safety: without JavaScript nothing shows; if the intro never hands over, the boot script releases the page after 7 seconds.
+- `useIntroReady()` lets components wait for the handoff (used by the hero).
+- Dev note: Turbopack sometimes misses edits to `globals.css` (twice this session). If styles look stale, make a small edit to the file again or restart the dev server.
+
 Read this file and `reference-analysis.md` at the start of every session, then inspect the code before continuing.
 
 ## Status

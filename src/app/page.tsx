@@ -1,4 +1,5 @@
 import { FloatingActions } from "@/components/floating-actions";
+import { IntroProvider } from "@/components/intro";
 import { MotionProvider } from "@/components/motion";
 import { About } from "@/components/sections/about";
 import { Contact } from "@/components/sections/contact";
@@ -32,22 +33,24 @@ const jsonLd = {
 export default function Home() {
   return (
     <MotionProvider>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
-      <SiteHeader />
-      <main id="main" tabIndex={-1} className="outline-none">
-        <Hero />
-        <About />
-        <Statement />
-        <Services />
-        <Experience />
-        <Why />
-        <Contact />
-      </main>
-      <SiteFooter />
-      <FloatingActions />
+      <IntroProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        />
+        <SiteHeader />
+        <main id="main" tabIndex={-1} className="outline-none">
+          <Hero />
+          <About />
+          <Statement />
+          <Services />
+          <Experience />
+          <Why />
+          <Contact />
+        </main>
+        <SiteFooter />
+        <FloatingActions />
+      </IntroProvider>
     </MotionProvider>
   );
 }

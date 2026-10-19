@@ -10,7 +10,7 @@ export function SiteFooter() {
       <div className="container-x relative grid gap-14 pb-10 pt-20 lg:pt-28">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <Monogram className="h-12 w-12 text-glow" />
+            <Monogram className="h-12 w-[2.667rem] text-glow" />
             <p className="font-display mt-8 max-w-[16ch] text-[clamp(2.2rem,4.4vw,3.6rem)] leading-[1.02]">
               Building exceptional homes, <em className="text-glow">under one roof.</em>
             </p>
